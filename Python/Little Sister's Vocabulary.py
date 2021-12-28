@@ -2,7 +2,9 @@ def add_prefix_un(word):
     return "un" + word
 
 def make_word_groups(vocab_words):
-    return vocab_words[0].join(vocab_words[1:])
+    for single_word in vocab_words:
+        if vocab_words=[0] != single_word:
+            vocab_words[0].join(single_word)
 
 def remove_suffix_ness(word):
     new_str = word[:-4]
