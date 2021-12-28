@@ -53,7 +53,7 @@ Text_Output()
     pad="                               "
     printf "%s\n" "Team                           | MP |  W |  D |  L |  P"
 
-  #redo fucking stupid sorting AAAAAAAAAAAAAAAAAA
+  #redo sorting
 
     for (( i=0; i<Team_Amt; i++ ))
         do
