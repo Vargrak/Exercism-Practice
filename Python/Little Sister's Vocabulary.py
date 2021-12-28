@@ -2,15 +2,17 @@ def add_prefix_un(word):
     return "un" + word
 
 def make_word_groups(vocab_words):
-    for single_word in vocab_words:
-        if vocab_words=[0] != single_word:
-            vocab_words[0].join(single_word)
+    prefix = ' :: ' + vocab_words[0]
+    return prefix.join(vocab_words)
 
 def remove_suffix_ness(word):
-    new_str = word[:-4]
-    if "i" in new_str[-1]:
-        new_str=new_str[:-1] + "y"
-    return new_str
+    if "i" in word[-5]:
+        return word[:-5] + "y"
+    else:
+        return word[:-4]
 
 def noun_to_verb(sentence, index):
-    a
+    verb = sentence.split()[index]
+    if "." in verb:
+        verb = verb[:-1]
+    return verb + "en"
