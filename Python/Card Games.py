@@ -17,7 +17,6 @@ def approx_average_is_average(hand):
 def average_even_is_average_odd(hand):
     return  (sum(hand[::2]) / len(hand[::2])) == card_average(hand) or card_average(hand) == (sum(hand[1::2]) / len(hand[1::2]))
     
-
 def maybe_double_last(hand):
     if hand[-1] == 11:
         hand[-1] = 22
