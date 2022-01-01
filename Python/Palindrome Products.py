@@ -68,5 +68,3 @@ def initialization(half, max_factor, min_factor = 0):
             return factors[len(factors)//2:]
     else:
         return factors
-
-print(largest(min_factor=1000, max_factor=9999))
