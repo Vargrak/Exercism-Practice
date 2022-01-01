@@ -4,20 +4,22 @@ EQUAL = "Equal"
 UNEQUAL = "Unequal"
 
 def sublist(list_one, list_two):
-        for index_x, x in enumerate(list_one):
-            for index_y, y in enumerate(list_two):
-                if x == y and list_one[index_x+1] == list_two[index_y+1]:
-                    hook = [index_x, index_y]
-        if len(list_one) > len(list_two):
-            for i in range(hook[0], (hook[0] + len(list_two))):
-                print(i)
+    if len(list_one) > len(list_two):
+        if list_two == []:
+            return SUPERLIST
+        for index in range(0, len(list_one) - len(list_two) + 1):
+            if list_one[index:(index+len(list_two))] == list_two:
+                return SUPERLIST
+        return UNEQUAL
 
+    if len(list_two) > len(list_one):
+        if list_one == []:
+            return SUBLIST
+        for index in range(0, len(list_two) - len(list_one) + 1):
+            if list_two[index:(index+len(list_one))] == list_one:
+                return SUBLIST
+        return UNEQUAL
 
-
-
-
-
-
-
-
-sublist([1, 2, 3, 4, 5, 6], [3, 4, 5])
+    if list_one == list_two:
+        return EQUAL
+    return UNEQUAL

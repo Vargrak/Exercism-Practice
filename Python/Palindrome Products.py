@@ -1,11 +1,3 @@
-#Not yet marked as completed - takes too long or has an infinite loop according to exercism
-#testing in vscode yields correct results, unsure how to test 'def assertFactorsEqual'
-#execution time around 15.5 seconds
-
-import itertools
-import time
-start = time.time()
-
 def largest(max_factor, min_factor = 0):
     result = (None, [])
     return_product = largest_product = 0
@@ -29,9 +21,9 @@ def largest(max_factor, min_factor = 0):
     if return_product < 1:
         return result
     elif len(extra_factors) > 1:
-        return (return_product, return_factors, extra_factors)
+        return (return_product, [return_factors, extra_factors])
     else:
-        return (return_product, return_factors)
+        return (return_product, [return_factors])
 
 def smallest(max_factor, min_factor = 0):
     result = (None, [])
@@ -57,9 +49,9 @@ def smallest(max_factor, min_factor = 0):
     if return_product < 1:
         return result
     elif len(extra_factors) > 1:
-        return (return_product, return_factors, extra_factors)
+        return (return_product, [return_factors, extra_factors])
     else:
-        return (return_product, return_factors)
+        return (return_product, [return_factors])
 
 def initialization(half, max_factor, min_factor = 0):
     factors = []
@@ -69,26 +61,12 @@ def initialization(half, max_factor, min_factor = 0):
         factors.append(factor)
     if len(factors) > 1000:
         if half == "small":
+            factors = factors[:len(factors)//2]
             return factors[:len(factors)//2]
         if half == "large":
+            factors = factors[len(factors)//2:]
             return factors[len(factors)//2:]
     else:
         return factors
 
-print(smallest(min_factor=1, max_factor=9))
-print(largest(min_factor=1, max_factor=9))
-print(smallest(min_factor=10, max_factor=99))
-print(largest(min_factor=10, max_factor=99))
-print(smallest(min_factor=100, max_factor=999))
-print(largest(min_factor=100, max_factor=999))
-print(smallest(min_factor=1000, max_factor=9999))
 print(largest(min_factor=1000, max_factor=9999))
-print(smallest(min_factor=1002, max_factor=1003))
-print(largest(min_factor=15, max_factor=15))
-
-#error handling tests
-#print(smallest(min_factor=10000, max_factor=1))
-#print(largest(min_factor=2, max_factor=1))
-
-execution_time = (time.time() - start)
-print("Execution time " + str(execution_time))
