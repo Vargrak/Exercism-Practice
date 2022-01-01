@@ -11,7 +11,3 @@ def preparation_time_in_minutes(number_of_layers):
 def elapsed_time_in_minutes(number_of_layers, elapsed_bake_time):
     """Time since start of cooking (baking plus layering)"""
     return elapsed_bake_time + preparation_time_in_minutes(number_of_layers)
-    
-def total_time_in_minutes(number_of_layers, actual_bake_time):
-    """Total time in minutes for baking and layering"""
-    return number_of_layers + actual_bake_time
