@@ -2,7 +2,7 @@ class Luhn:
     def __init__(self, card_num):
         self.card_num = card_num
 
-    def valid(self):
+    def valid(self, card_listd = None):
         card_listd = []
         card_num = self.card_num
         card_spaceless = ''.join(char for char in card_num if char not in " ")

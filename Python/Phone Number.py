@@ -49,5 +49,5 @@ class PhoneNumber:
     def pretty(self):
         number = self.number
         self.number_processing(number)
-        number = "(" + number[0:3] + ")-" + number[3:6] + "-" + number[6:10]
+        number = (f"({number[0:3]})-{number[3:6]}-{number[6:10]}")
         return number
