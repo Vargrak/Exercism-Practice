@@ -1,6 +1,3 @@
-import time
-start = time.time()
-
 def triplets_with_sum(number, triplet_list = None, c = 0):
     triplet_list = []
     for k in range(1, number):
@@ -19,5 +16,3 @@ def triplets_with_sum(number, triplet_list = None, c = 0):
                 if c > number:
                         break
     return sorted(triplet_list)
-print(triplets_with_sum(30000))
-print(time.time() - start)
