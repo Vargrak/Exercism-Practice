@@ -17,5 +17,11 @@ def remove_item(inventory, item):
         inventory.pop(item)
     return inventory
 
-def list_inventory(inventory):
-    return inventory.items()
+def list_inventory(inventory, inv_rm = None):
+    inv_rm = []
+    for key in inventory:
+        if inventory[key] == 0:
+            inv_rm.append(key)
+    for key in inv_rm:
+        inventory.pop(key)
+    return list(inventory.items())
