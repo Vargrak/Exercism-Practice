@@ -1,21 +1,11 @@
 #WIP
+from itertools import zip_longest
 
 def transpose(lines):
-    transposed = []
-    string = ''.join(lines)
-    rows = string.split("\n")
-    longest_row = len(sorted(rows, key=len)[-1])
-    for i in range(0, longest_row):
-        for row in rows:
-            if len(row) >= i+1:
-                transposed.append(row[i])
-            else:
-                transposed.append(" ")
-        transposed.append('\n')
-    if len(transposed) > 0:
-        transposed.pop(-1)
-    return ''.join(transposed)
+    rows = lines.split("\n")
+    tupled_list = list(zip_longest(*rows, fillvalue=" "))
+    detupled_list = [''.join(item) for item in tupled_list]
+    return '\n'.join(detupled_list)
 
 
-
-print(transpose("ABC\nDE\nTYUVW"))
+print(transpose("\n".join(lines)))
