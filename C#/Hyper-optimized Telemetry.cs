@@ -1,15 +1,8 @@
 using System;
 using System.Linq;
 
-
-
 public static class TelemetryBuffer
 {
-
-    public static void Main(string[] args)
-    {
-        Console.WriteLine(ToBuffer(Int32.MinValue));
-    }
     public static byte[] ToBuffer(long reading)
     {
 
@@ -44,12 +37,6 @@ public static class TelemetryBuffer
                 BitConverter.GetBytes(reading).CopyTo(buffer, 1);
                 return buffer;
             }
-            else if (reading > short.MaxValue)
-            {
-                buffer[0] = (byte)(2);
-                BitConverter.GetBytes(reading).CopyTo(buffer, 1);
-                return buffer;
-            }
             else
             {
                 buffer[0] = (byte)(2);
@@ -65,16 +52,19 @@ public static class TelemetryBuffer
                 BitConverter.GetBytes(reading).CopyTo(buffer, 1);
                 return buffer;
             }
-            else if (reading < short.MaxValue)
+
+            //casting need here else it takes up too much of the buffer
+            //no idea why it doesn't need this for the positive numbers
+            else if (reading < short.MinValue)
             {
                 buffer[0] = (byte)(256 - 4);
-                BitConverter.GetBytes(reading).CopyTo(buffer, 1);
+                BitConverter.GetBytes((int)reading).CopyTo(buffer, 1);
                 return buffer;
             }
             else
             {
                 buffer[0] = (byte)(256 - 2);
-                BitConverter.GetBytes(reading).CopyTo(buffer, 1);
+                BitConverter.GetBytes((short)reading).CopyTo(buffer, 1);
                 return buffer;
             }
         } 
@@ -86,6 +76,34 @@ public static class TelemetryBuffer
 
     public static long FromBuffer(byte[] buffer)
     {
-        throw new NotImplementedException("Please implement the static TelemetryBuffer.FromBuffer() method");
+        if ((256 - buffer[0]) == 8)
+        {
+            return BitConverter.ToInt64(buffer, 1);
+        }
+        else if ((256 - buffer[0]) == 4)
+        {
+            return BitConverter.ToInt32(buffer, 1);
+        }
+        else if ((256 - buffer[0]) == 2)
+        {
+            return BitConverter.ToInt16(buffer, 1);
+        }
+        else if (buffer[0] == 8)
+        {
+            return BitConverter.ToInt64(buffer, 1);
+        }
+        else if (buffer[0] == 4)
+        {
+            return BitConverter.ToUInt32(buffer, 1);
+        }
+        else if (buffer[0] == 2)
+        {
+            return BitConverter.ToUInt16(buffer, 1);
+        }
+        else
+        {
+            return 0;
+        }
+
     }
 }
