@@ -2,25 +2,35 @@ using System;
 
 class WeighingMachine
 {
-    public int precision;
-    public int Weight;
-    public int DisplayWeight;
-    public int TareAdjustment;
-    // Constructor:
-    // TODO: define the 'Precision' property
 
-    // TODO: define the 'Weight' property
-
-    // TODO: define the 'DisplayWeight' property
-
-    // TODO: define the 'TareAdjustment' property
+    public int Precision;
 
     public WeighingMachine(int precision)
     {
         this.Precision = precision;
-        this.Weight = 0;
-        this.DisplayWeight = 0;
-        this.TareAdjustment = 0;
     }
 
+    private double weight;
+    public double Weight
+    {
+        get { return weight; }
+        set { 
+
+            weight = value switch
+
+                {
+                    _ when value < 0 => throw new ArgumentOutOfRangeException("Weight cannot be negative"),
+                    _ => value
+                };
+            }
+    }
+    public string DisplayWeight
+    {
+        get { 
+                return $"{Math.Round((weight + -TareAdjustment), Precision).ToString("0." + new string('0', Precision))} kg"; 
+            }
+    }
+    public double TareAdjustment { get; set; } = 5;
+
 }
+
