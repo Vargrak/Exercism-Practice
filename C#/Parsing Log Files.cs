@@ -1,7 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
-// WIP
 public class LogParser
 {
     public bool IsValidLine(string text)
@@ -26,7 +26,18 @@ public class LogParser
 
     public string[] ListLinesWithPasswords(string[] lines)
     {
-        
+        List<string> result = new List<string>();
+        foreach (string line in lines)
+        {
+            if (Regex.IsMatch(line, @"password\S+", RegexOptions.IgnoreCase))
+            {
+                result.Add($"{Regex.Match(line, @"password\S+", RegexOptions.IgnoreCase)}: {line}");
+            }
+            else
+            {
+                result.Add($"--------: {line}");
+            }
+        }
+        return result.ToArray();
     }
-
 }
