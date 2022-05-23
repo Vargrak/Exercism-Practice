@@ -45,7 +45,7 @@ pub fn to_arbitary_base(mut sum: u32, to_base: u32) -> Vec<u32>
 {
     let mut result = vec![] as Vec<u32>;
 
-
+    
     // Remainder added to array, then divided by the base. Repeat till the sum is exhausted.
     while sum > 0
     {
